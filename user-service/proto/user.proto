@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc GetUserById (UserRequest) returns (UserResponse);
+  rpc GetAvailableAdmins (Empty) returns (AdminList);
+}
+
+message UserRequest {
+  int32 user_id = 1;
+}
+
+message UserResponse {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string role = 4;
+  bool valid = 5;
+}
+
+message Empty {}
+
+message AdminList {
+  repeated UserResponse admins = 1;
+}

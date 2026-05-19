@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Distributed Helpdesk Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Distributed Helpdesk Ticketing System</h1>
+      <p>
+        REST API, gRPC, RabbitMQ, PostgreSQL, Load Balancing, dan
+        Hirschberg-Sinclair Leader Election
+      </p>
+    </header>
+
+    <main>
+      <section class="grid">
+        <div class="card">
+          <h2>Leader Monitor</h2>
+          <p>Leader Aktif:</p>
+          <h3 id="leaderId">Loading...</h3>
+
+          <div class="button-group">
+            <button onclick="startElection()">Start Election</button>
+            <button onclick="failNode50()" class="danger">Fail Node 50</button>
+            <button onclick="recoverNode50()" class="success">
+              Recover Node 50
+            </button>
+          </div>
+
+          <pre id="leaderLog"></pre>
+        </div>
+
+        <div class="card">
+          <h2>Buat Ticket</h2>
+
+          <label>User ID</label>
+          <input type="number" id="userId" value="1" />
+
+          <label>Judul</label>
+          <input
+            type="text"
+            id="title"
+            placeholder="Contoh: Tidak bisa login"
+          />
+
+          <label>Deskripsi</label>
+          <textarea
+            id="description"
+            placeholder="Jelaskan masalah pengguna"
+          ></textarea>
+
+          <label>Kategori</label>
+          <select id="category">
+            <option value="Account">Account</option>
+            <option value="Network">Network</option>
+            <option value="Hardware">Hardware</option>
+            <option value="Email">Email</option>
+            <option value="Server">Server</option>
+          </select>
+
+          <label>Prioritas</label>
+          <select id="priority">
+            <option value="LOW">LOW</option>
+            <option value="MEDIUM">MEDIUM</option>
+            <option value="HIGH">HIGH</option>
+          </select>
+
+          <button onclick="createTicket()">Submit Ticket</button>
+          <p id="createStatus"></p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Daftar Ticket</h2>
+        <button onclick="loadAllData()">Refresh Data</button>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User</th>
+              <th>Judul</th>
+              <th>Kategori</th>
+              <th>Prioritas</th>
+              <th>Status</th>
+              <th>Instance</th>
+            </tr>
+          </thead>
+          <tbody id="ticketTable"></tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>Assignment Ticket</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Ticket</th>
+              <th>Admin</th>
+              <th>Leader ID</th>
+              <th>Waktu</th>
+            </tr>
+          </thead>
+          <tbody id="assignmentTable"></tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>Notifikasi</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User</th>
+              <th>Ticket ID</th>
+              <th>Pesan</th>
+              <th>Waktu</th>
+            </tr>
+          </thead>
+          <tbody id="notificationTable"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
