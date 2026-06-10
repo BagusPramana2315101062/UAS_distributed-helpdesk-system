@@ -189,7 +189,6 @@ Leader aktif digunakan dalam proses assignment tiket. Nilai leader disimpan pada
 distributed-helpdesk-system/
 ├── assignment-service/
 ├── database/
-├── docs/
 ├── frontend/
 ├── leader-election-service/
 ├── nginx/
